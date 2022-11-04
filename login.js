@@ -10,6 +10,7 @@ import {
   getDatabase,
   ref,
   set,
+  update,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -122,7 +123,7 @@ function log_in_f() {
         last_login: Date.now(),
       };
 
-      set(ref(database, "users/" + user.uid), user_data);
+      update(ref(database, "users/" + user.uid), user_data);
     })
     .catch(function (err) {
       var error_code = err.code;
