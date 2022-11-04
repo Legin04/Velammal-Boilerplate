@@ -1,8 +1,16 @@
 console.clear();
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
-import { getDatabase } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+import {
+  getDatabase,
+  ref,
+  set,
+} from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyApJFatbxamgzVSw3uMtjsBrlXVce6YOoA",
@@ -21,7 +29,7 @@ const app = initializeApp(firebaseConfig);
 //Initialize variables
 
 const auth = getAuth(app);
-const database = getDatabase(app);
+const database = getDatabase();
 
 const loginBtn = document.getElementById("login");
 const signupBtn = document.getElementById("signup");
@@ -59,18 +67,74 @@ log_in.addEventListener("click", log_in_f, false);
 
 function sign_up_f() {
   // Get field data
-  name_s = document.getElementById("s_name").value;
-  email = document.getElementById("s_email").value;
-  password = document.getElementById("s_password").value;
-
-  console.log("wow");
+  const name_s = document.getElementById("s_name").value;
+  const email = document.getElementById("s_email").value;
+  const password = document.getElementById("s_password").value;
 
   // Validations
+  if (
+    validate_email(email) == false ||
+    validate_password(password) == false ||
+    validate_field(name_s) == false
+  ) {
+    alert("Please enter valid details");
+    return;
+  }
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(function () {
+      var user = auth.currentUser;
+      alert("  User Created  ");
+
+      var user_data = {
+        email: email,
+        name_s: name_s,
+        last_login: Date.now(),
+      };
+
+      set(ref(database, "users/" + user.uid), user_data);
+    })
+    .catch(function (err) {
+      var error_code = err.code;
+      var error_msg = err.message;
+
+      alert(error_msg);
+    });
+}
+
+function log_in_f() {
+  //Get Data fields
+  const email = document.getElementById("l_email").value;
+  const password = document.getElementById("l_password").value;
+
+  //validates
+  if (validate_email(email) == false || validate_password(password) == false) {
+    alert("Please enter valid details");
+    return;
+  }
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then(function () {
+      var user = auth.currentUser;
+      alert("  User Logged In");
+
+      var user_data = {
+        last_login: Date.now(),
+      };
+
+      set(ref(database, "users/" + user.uid), user_data);
+    })
+    .catch(function (err) {
+      var error_code = err.code;
+      var error_msg = err.message;
+
+      alert(error_msg);
+    });
 }
 
 function validate_email(email) {
-  expression = /^[^@]+@\w+(\.\w+)+\w$/;
-  if (expression.test(email)) {
+  const expression = /^[^@]+@\w+(\.\w+)+\w$/;
+  if (expression.test(email) == true) {
     return true;
   } else {
     return false;
@@ -87,6 +151,10 @@ function validate_password(password) {
 
 function validate_field(field) {
   if (field == null) {
+    return false;
+  }
+
+  if (field.length <= 0) {
     return false;
   } else {
     return true;
