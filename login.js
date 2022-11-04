@@ -1,6 +1,7 @@
 console.clear();
 
-import firebase from "firebase/app";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyApJFatbxamgzVSw3uMtjsBrlXVce6YOoA",
@@ -14,7 +15,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 const loginBtn = document.getElementById("login");
 const signupBtn = document.getElementById("signup");
