@@ -1,7 +1,8 @@
 console.clear();
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyApJFatbxamgzVSw3uMtjsBrlXVce6YOoA",
@@ -16,10 +17,16 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+//Initialize variables
+
+const auth = getAuth(app);
+const database = getDatabase(app);
 
 const loginBtn = document.getElementById("login");
 const signupBtn = document.getElementById("signup");
+const s_button = document.getElementById("s-button");
+const l_button = document.getElementById("l-button");
 
 loginBtn.addEventListener("click", (e) => {
   let parent = e.target.parentNode.parentNode;
@@ -44,3 +51,6 @@ signupBtn.addEventListener("click", (e) => {
     }
   });
 });
+
+
+function signup()
