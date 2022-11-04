@@ -25,6 +25,8 @@ const database = getDatabase(app);
 
 const loginBtn = document.getElementById("login");
 const signupBtn = document.getElementById("signup");
+const sign_up = document.getElementById("s-button");
+const log_in = document.getElementById("l-button");
 const s_button = document.getElementById("s-button");
 const l_button = document.getElementById("l-button");
 
@@ -52,5 +54,41 @@ signupBtn.addEventListener("click", (e) => {
   });
 });
 
+sign_up.addEventListener("click", sign_up_f, false);
+log_in.addEventListener("click", log_in_f, false);
 
-function signup()
+function sign_up_f() {
+  // Get field data
+  name_s = document.getElementById("s_name").value;
+  email = document.getElementById("s_email").value;
+  password = document.getElementById("s_password").value;
+
+  console.log("wow");
+
+  // Validations
+}
+
+function validate_email(email) {
+  expression = /^[^@]+@\w+(\.\w+)+\w$/;
+  if (expression.test(email)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function validate_password(password) {
+  if (password < 6) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function validate_field(field) {
+  if (field == null) {
+    return false;
+  } else {
+    return true;
+  }
+}
