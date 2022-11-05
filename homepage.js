@@ -2,7 +2,7 @@ console.clear();
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
 import { getAuth,} from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
-import {  getDatabase, ref, set, update,} from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+import {  getStorage, ref as sRef ,  getDownloadUrl,} from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyApJFatbxamgzVSw3uMtjsBrlXVce6YOoA",
@@ -21,4 +21,12 @@ const app = initializeApp(firebaseConfig);
 //Initialize variables
 
 const auth = getAuth(app);
-const database = getDatabase();
+
+
+
+//------------------//
+
+var files = [];
+var reader = new FileReader()
+
+
