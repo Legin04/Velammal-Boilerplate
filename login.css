@@ -42,7 +42,7 @@ body {
   background-repeat: no-repeat;
   background-position: left bottom;
   background-size: 500px;
-  background-image: url("https://plus.unsplash.com/premium_photo-1667404187119-bf91eed6a77b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
+  background-image: url("https://images.unsplash.com/photo-1566305977571-5666677c6e98?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=345&q=80");
 }
 .form-structor .signup {
   position: absolute;
@@ -73,7 +73,7 @@ body {
   -webkit-transition: all 0.3s ease;
 }
 .form-structor .signup .form-title {
-  color: #fff;
+  color: black;
   font-size: 1.7em;
   text-align: center;
 }

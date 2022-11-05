@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
 import { getAuth,} from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
-//import {  getStorage, ref as sRef ,  getDownloadUrl,} from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
+import {  getStorage, ref as sRef , uploadBytesResumable, getDownloadURL,} from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyApJFatbxamgzVSw3uMtjsBrlXVce6YOoA",
@@ -66,6 +66,22 @@ function GetFileName(file) {
     var temp = file.name.split('.');
     var file_name = temp.slice(0, -1).join('.');
     return file_name;  
+}
+
+//------------------Upload-----------------------------//
+
+async function UploadFile() {
+    var img_to_up = files[0];
+
+    var img_name = namebox.value + extlab.innerHTML;
+
+    const metaData = {
+        contentType:img_to_up.type,
+    }
+
+    const storage = getStorage();
+
+    const storageRef = sRef(storage, "Data/"+auth.currentUser.uid)
 }
 
 
